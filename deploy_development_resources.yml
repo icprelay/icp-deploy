@@ -13,10 +13,13 @@ parameters:
   displayName: 'Azure Service connection name'
   type: string
   default: 'icp-azure-connection'
+  values: [icp-azure-connection]
 - name: 'git'
   displayName: 'Git Service connection name'
   type: string
   default: 'icp-git-connection'
+  values: [icp-git-connection]
+
 - name: 'location'
   type: string
   default: 'West Europe'
