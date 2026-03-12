@@ -1,5 +1,16 @@
 trigger: none
 
+resources:
+  repositories:
+    - repository: icpcore
+      type: github
+      name: icprelay/icp-core
+      ref: refs/tags/v0.1.0
+      endpoint: 'icp-git-connection'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
 parameters:
 - name: 'projectname'
   displayName: 'Project name'
@@ -23,17 +34,6 @@ parameters:
 - name: 'location'
   type: string
   default: 'West Europe'
-
-resources:
-  repositories:
-    - repository: icpcore
-      type: github
-      name: icprelay/icp-core
-      ref: refs/tags/v0.1.0
-      endpoint: 'icp-git-connection'
-
-pool:
-  vmImage: 'ubuntu-latest'
 
 steps:
 - checkout: self

@@ -1,8 +1,15 @@
 trigger: none
 
+resources:
+  repositories:
+    - repository: icpcore
+      type: github
+      name: icprelay/icp-core
+      ref: refs/tags/v0.1.0
+      endpoint: 'icp-git-connection'
+
 pool:
   vmImage: 'ubuntu-latest'
-
 
 parameters:
 - name: projectname
@@ -12,9 +19,15 @@ parameters:
   default: ''
   type: string
 - name: 'subscription'
-  displayName: 'Azure Subscription'
+  displayName: 'Azure Service connection name'
   type: string
-  default: 'icp-service-connection'
+  default: 'icp-azure-connection'
+  values: [icp-azure-connection]
+- name: 'git'
+  displayName: 'Git Service connection name'
+  type: string
+  default: 'icp-git-connection'
+  values: [icp-git-connection]
 
 variables:
   ResourceGroup: "icp-persistent"

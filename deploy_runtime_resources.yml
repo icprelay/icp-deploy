@@ -1,5 +1,16 @@
 trigger: none
 
+resources:
+  repositories:
+    - repository: icpcore
+      type: github
+      name: icprelay/icp-core
+      ref: refs/tags/v0.1.0
+      endpoint: 'icp-git-connection'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
 parameters:
 - name: 'projectname'
   displayName: 'Project name'
@@ -10,9 +21,15 @@ parameters:
   type: string
   default: ''
 - name: 'subscription'
-  displayName: 'Azure Subscription'
+  displayName: 'Azure Service connection name'
   type: string
-  default: 'icp-service-connection'
+  default: 'icp-azure-connection'
+  values: [icp-azure-connection]
+- name: 'git'
+  displayName: 'Git Service connection name'
+  type: string
+  default: 'icp-git-connection'
+  values: [icp-git-connection]
 - name: 'apiappclientid'
   displayName: 'API App Registration Client ID'
   type: string
@@ -21,9 +38,9 @@ parameters:
   displayName: 'UI App Registration Client ID'
   type: string
   default: 'YOUR_UI_APP_REGISTRATION_ID'
-
-pool:
-  vmImage: 'ubuntu-latest'
+- name: 'location'
+  type: string
+  default: 'West Europe'
 
 steps:
 
@@ -33,6 +50,6 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group create --name "icp-runtime" --location "West Europe"
+      az group create --name "icp-runtime" --location "${{ parameters.location }}"
       az deployment group create --resource-group "icp-runtime" --template-file "infra/runtime_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}" uiClientId="${{ parameters.uiappclientid }}" apiClientId="${{ parameters.apiappclientid }}"
   displayName: 'Deploy Bicep Files'
