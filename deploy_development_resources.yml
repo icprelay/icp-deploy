@@ -1,5 +1,12 @@
 trigger: none
 
+resources:
+  repositories:
+    - repository: icpcore
+      type: github
+      name: icprelay/icp-core
+      ref: refs/tags/v1.0.0
+
 parameters:
 - name: 'projectname'
   displayName: 'Project name'
@@ -13,6 +20,9 @@ parameters:
   displayName: 'Azure Subscription'
   type: string
   default: 'icp-service-connection'
+- name: 'location'
+  type: string
+  default: 'West Europe'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,11 +30,19 @@ pool:
 steps:
 
 - task: AzureCLI@2
+  displayName: 'Deploy Bicep Files'
   inputs:
     azureSubscription: '${{ parameters.subscription }}'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group create --name "icp-development" --location "West Europe"
-      az deployment group create --resource-group "icp-development" --template-file "infra/local_dev_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}"
-  displayName: 'Deploy Bicep Files'
+      set -e
+
+      az group create \
+        --name "icp-development" \
+        --location "${{ parameters.location }}"
+
+      az deployment group create \
+        --resource-group "icp-development" \
+        --template-file "$(Build.SourcesDirectory)/icpcore/infra/local_dev_resources.bicep" \
+        --parameters project="${{ parameters.projectname }}-${{ parameters.customername }}"
