@@ -39,10 +39,10 @@ After creation, add it to the table below and replace all placeholders
 
 ### 3. Create a new Azure Subscription. Name it however you want.
 
-### 4. Create a DevOps Service Connection to that Azure Subscription.
+### 4.1 Create a DevOps Service Connection to that Azure Subscription.
 
 - Azure DevOps -> Project Settings -> Service connections -> New service connection -> Choose "Azure Resource Manager" -> Click [ **Next** ]
-- In the following view you set the settings for the New Azure service connection. The correct settings are:
+- In the following view you set the settings for the new Azure service connection. The correct settings are:
 
     |setting|value|
     |-------|-----|
@@ -66,6 +66,22 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
 2. Branding & properties 
 3. _set name_ f.e. `icp-azure-connection` 
 4. click [ **Save** ]
+
+### 4.1 Create a GitHub Service Connection
+
+- Azure DevOps -> Project Settings -> Service connections -> New service connection -> Choose "GitHub" -> Click [ **Next** ]
+- In the following view you set the settings for the new GitHub service connection. The correct settings are:
+
+    |setting|value|
+    |-------|-----|
+    |Authentication method|[x] Grant authorization|
+    |OAuth configuration|AzurePipelines|
+    |Service Connection Name| `icp-git-connection` | 
+    |Description (optional)| |
+    |Security| [x] Grant access permission to all pipelines |
+
+1. Click [ **Authorize** ]
+2. Click [ **Save** ]
 
 ### 5. Service Connection role assignment
 
