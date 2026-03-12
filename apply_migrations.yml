@@ -35,10 +35,13 @@ variables:
   SqlName: ${{ parameters.projectname }}-${{ parameters.customername }}-sql
   ApiUamiName: "${{ parameters.projectname }}-${{ parameters.customername }}-web-api-uami"
   LogicAppUamiName: "${{ parameters.projectname }}-${{ parameters.customername }}-logicapp-uami"
-  EfProject: "src/Icp.Persistence/Icp.Persistence.csproj"
-  RunnerProject: "src/Icp.SqlRunner/Icp.SqlRunner.csproj"
+  EfProject: "$(Build.SourcesDirectory)/icp-core/src/Icp.Persistence/Icp.Persistence.csproj"
+  RunnerProject: "$(Build.SourcesDirectory)/icp-core/src/Icp.SqlRunner/Icp.SqlRunner.csproj"
 
 steps:
+- checkout: self
+- checkout: icpcore
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'

@@ -42,6 +42,9 @@ variables:
   buildConfiguration: 'Release'
  
 steps:
+- checkout: self
+- checkout: icpcore
+
 - task: UseDotNet@2
   displayName: 'Use .NET 10.0 SDK'
   inputs:
@@ -55,7 +58,7 @@ steps:
   displayName: 'Restore UI project'
   inputs:
     command: 'restore'
-    projects: 'src\Icp.Ui\Icp.Ui.csproj'
+    projects: '$(Build.SourcesDirectory)/icp-core/src/Icp.Ui/Icp.Ui.csproj'
     includeNuGetOrg: true
         
 - task: DotNetCoreCLI@2
@@ -69,14 +72,14 @@ steps:
       /p:FileVersion=$(Build.BuildNumber)
       /p:InformationalVersion=$(Build.BuildNumber)+$(Build.SourceBranchName).$(Build.SourceVersion)
     projects: |
-      src\Icp.Ui\Icp.Ui.csproj
+      $(Build.SourcesDirectory)/icp-core/src/Icp.Ui/Icp.Ui.csproj
     publishWebProjects: false
     zipAfterPublish: false
  
 - task: ArchiveFiles@2
   displayName: 'Zip web UI'
   inputs:
-    rootFolderOrFile: 'src\Icp.Ui\bin\Release\net10.0\publish\'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/icp-core/src/Icp.Ui/bin/Release/net10.0/publish/'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.DefaultWorkingDirectory)/ui.zip'

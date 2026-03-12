@@ -44,6 +44,9 @@ parameters:
 
 steps:
 
+- checkout: self
+- checkout: icpcore
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: '${{ parameters.subscription }}'
@@ -51,5 +54,5 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az group create --name "icp-persistent" --location "${{ parameters.location }}"
-      az deployment group create --resource-group "icp-persistent" --template-file "infra/persistent_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}" adminObjectId="${{ parameters.sqladmingroupobjectid }}" adminLogin="${{ parameters.sqladmingroupname }}"
+      az deployment group create --resource-group "icp-persistent" --template-file "$(Build.SourcesDirectory)/icp-core/infra/persistent_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}" adminObjectId="${{ parameters.sqladmingroupobjectid }}" adminLogin="${{ parameters.sqladmingroupname }}"
   displayName: 'Deploy Bicep Files'

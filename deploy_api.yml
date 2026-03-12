@@ -37,6 +37,9 @@ variables:
   buildConfiguration: 'Release'
  
 steps:
+- checkout: self
+- checkout: icpcore
+
 - task: UseDotNet@2
   displayName: 'Use .NET 10.0 SDK'
   inputs:
@@ -49,7 +52,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    projects: 'src\Icp.Api.Host\Icp.Api.Host.csproj'
+    projects: '$(Build.SourcesDirectory)/icp-core/src/Icp.Api.Host/Icp.Api.Host.csproj'
     includeNuGetOrg: true
         
 - task: DotNetCoreCLI@2
@@ -58,14 +61,14 @@ steps:
     command: publish
     arguments: -c Release
     projects: |
-      src\Icp.Api.Host\Icp.Api.Host.csproj
+      $(Build.SourcesDirectory)/icp-core/src/Icp.Api.Host/Icp.Api.Host.csproj
     publishWebProjects: false
     zipAfterPublish: false
  
 - task: ArchiveFiles@2
   displayName: 'Zip web api'
   inputs:
-    rootFolderOrFile: 'src\Icp.Api.Host\bin\Release\net10.0\publish\'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/icp-core/src/Icp.Api.Host/bin/Release/net10.0/publish/'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.DefaultWorkingDirectory)/api.zip'

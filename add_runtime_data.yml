@@ -92,9 +92,12 @@ parameters:
 variables:
   RuntimeDbName: ${{ parameters.projectname }}-${{ parameters.customername }}-runtime-db
   SqlName: ${{ parameters.projectname }}-${{ parameters.customername }}-sql
-  RunnerProject: "src/Icp.SqlRunner/Icp.SqlRunner.csproj"
+  RunnerProject: "$(Build.SourcesDirectory)/icp-core/src/Icp.SqlRunner/Icp.SqlRunner.csproj"
 
 steps:
+- checkout: self
+- checkout: icpcore
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'

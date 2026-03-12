@@ -42,11 +42,12 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - checkout: self
+    - checkout: icpcore
 
     - task: ArchiveFiles@2
       displayName: Package Logic App Standard workflows
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/logicapps/icp-workspace/icp-logicapp'
+        rootFolderOrFile: '$(Build.SourcesDirectory)/icp-core/logicapps/icp-workspace/icp-logicapp'
         includeRootFolder: false
         archiveType: zip
         archiveFile: '$(Build.ArtifactStagingDirectory)/logicapp.zip'
