@@ -29,6 +29,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- checkout: self
+- checkout: icpcore
 
 - task: AzureCLI@2
   displayName: 'Deploy Bicep Files'
