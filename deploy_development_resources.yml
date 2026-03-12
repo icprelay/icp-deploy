@@ -6,6 +6,7 @@ resources:
       type: github
       name: icprelay/icp-core
       ref: refs/tags/v0.1.0
+      endpoint: 'icp-git'
 
 parameters:
 - name: 'projectname'
