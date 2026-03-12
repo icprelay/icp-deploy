@@ -47,5 +47,5 @@ steps:
 
       az deployment group create \
         --resource-group "icp-development" \
-        --template-file "$(Build.SourcesDirectory)/icpcore/infra/local_dev_resources.bicep" \
+        --template-file "$(Build.SourcesDirectory)/icp-core/infra/local_dev_resources.bicep" \
         --parameters project="${{ parameters.projectname }}-${{ parameters.customername }}"
