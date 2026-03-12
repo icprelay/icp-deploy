@@ -30,7 +30,7 @@ resources:
       type: github
       name: icprelay/icp-core
       ref: refs/tags/v0.1.0
-      endpoint: '${{ parameters.git }}'
+      endpoint: 'icp-git-connection'
 
 pool:
   vmImage: 'ubuntu-latest'
