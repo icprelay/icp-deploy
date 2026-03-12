@@ -19,7 +19,7 @@ parameters:
 - name: 'customername'
   displayName: 'Customer name'
   type: string
-  default: 'qrp'
+  default: ''
 - name: 'subscription'
   displayName: 'Azure Service connection name'
   type: string
