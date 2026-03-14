@@ -144,7 +144,9 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
 
 # Deployment stage
 
-## 1. Run "Deploy Persistent Resources"
+Create Azure Pipelines for each yaml file and run it with the parameters stated below.
+
+## 1. Run `deploy_persistent_resources.yaml`
 
 |parameter|value|
 |--|--|
@@ -153,7 +155,7 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
 |icp-sql-admins group Object Id|`ICP_SQL_ADMINS_OBJECT_ID`|
 
 
-After completion, assign sql managed identity to Directory Readers role.
+After completion, assign the sql managed identity to `Directory Readers` role.
 
 1. Navigate to Entra ID -> Roles & admins
 2. Search for `Directory Readers`
@@ -162,7 +164,7 @@ After completion, assign sql managed identity to Directory Readers role.
 5. Search `icp-REPLACE_ALL_WITH_YOUR_OWN_NAMING-sql`
 6. click [ **Add** ]
 
-### 2. Run "Deploy Runtime Resources"
+### 2. Run `deploy_runtime_resources.yaml`
 
 |parameter|value|
 |--|--|
@@ -171,28 +173,28 @@ After completion, assign sql managed identity to Directory Readers role.
 |API App Registration Client ID|`REPLACE_ALL_WITH_API_APP_REGISTRATION_ID`|
 |UI App Registration Client ID|`REPLACE_ALL_WITH_UI_APP_REGISTRATION_ID`|
 
-### 3. Run "Deploy Logic Apps"
+### 3. Run `deploy_logicapp.yaml`
 
 |parameter|value|
 |--|--|
 |Customer name|`REPLACE_ALL_WITH_YOUR_OWN_NAMING`|
 |Azure subscription|`icp-azure-connection`|
 
-### 4. Run "Deploy API"
+### 4. Run `deploy_api.yaml`
 
 |parameter|value|
 |--|--|
 |Customer name|`REPLACE_ALL_WITH_YOUR_OWN_NAMING`|
 |Azure subscription|`icp-azure-connection`|
 
-### 5. Run "Deploy UI"
+### 5. Run `deploy_ui.yaml`
 
 |parameter|value|
 |--|--|
 |Customer name|`REPLACE_ALL_WITH_YOUR_OWN_NAMING`|
 |Azure subscription|`icp-azure-connection`|
 
-### 6. Run "DB Migrations + Grants + Seeding"
+### 6. Run `deploy_data.yaml`
 
 |parameter|value|
 |--|--|
