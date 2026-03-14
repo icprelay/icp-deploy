@@ -1,13 +1,5 @@
 trigger: none
 
-resources:
-  repositories:
-    - repository: icpcore
-      type: github
-      name: icprelay/icp-core
-      ref: refs/tags/v0.1.0
-      endpoint: 'icp-git-connection'
-
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -45,7 +37,6 @@ parameters:
 steps:
 
 - checkout: self
-- checkout: icpcore
 
 - task: AzureCLI@2
   inputs:
@@ -54,5 +45,5 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az group create --name "icp-runtime" --location "${{ parameters.location }}"
-      az deployment group create --resource-group "icp-runtime" --template-file "$(Build.SourcesDirectory)/icp-core/infra/runtime_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}" uiClientId="${{ parameters.uiappclientid }}" apiClientId="${{ parameters.apiappclientid }}"
+      az deployment group create --resource-group "icp-runtime" --template-file "$(Build.SourcesDirectory)/infra/runtime_resources.bicep" --parameters project="${{ parameters.projectname }}-${{ parameters.customername}}" uiClientId="${{ parameters.uiappclientid }}" apiClientId="${{ parameters.apiappclientid }}"
   displayName: 'Deploy Bicep Files'
