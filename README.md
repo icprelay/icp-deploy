@@ -2,6 +2,8 @@
 
 This project pulls the latest release from `icprelay/icp-core` repository.
 
+Current version: v0.2.1
+
 ## Requirements
 
 - Azure DevOps account
