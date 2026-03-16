@@ -100,6 +100,10 @@ var appsettings = [
     value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey};EndpointSuffix=core.windows.net'
   }
   {
+    name: 'azureTables_connectionString'
+    value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey};EndpointSuffix=core.windows.net'
+  }
+  {
     name: 'serviceBus_connectionString'
     value: listKeys('${servicebus.id}/AuthorizationRules/RootManageSharedAccessKey', servicebus.apiVersion).primaryConnectionString
   }

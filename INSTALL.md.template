@@ -75,13 +75,12 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
     |setting|value|
     |-------|-----|
     |Authentication method|[x] Grant authorization|
-    |OAuth configuration|AzurePipelines|
+    |OAuth configuration|AzurePipelines (and click **Authorize**)|
     |Service Connection Name| `icp-git-connection` | 
     |Description (optional)| |
     |Security| [x] Grant access permission to all pipelines |
 
-1. Click [ **Authorize** ]
-2. Click [ **Save** ]
+- Click [ **Save** ]
 
 ### 5. Service Connection role assignment
 
@@ -109,7 +108,7 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
 1. Navigate to Entra ID → App registrations 
 2. Click +New registration
 3. Name it `icp-REPLACE_ALL_WITH_YOUR_OWN_NAMING-api-app-reg` 
-4. [x] **Accounts in this organizational directory only (Single tenant)**
+4. _Supported account type_: **Single tenant only - \<your-organization>**
 5. click [ **Register** ]
 6. Add the app registration **client id** the table below and replace all placeholders
 
@@ -124,11 +123,11 @@ Servce connection name is different in Azure DevOps and Azure Portal. To avoid c
 1. Navigate to Entra ID → App registrations 
 2. Click +New registration
 3. Name it `icp-REPLACE_ALL_WITH_YOUR_OWN_NAMING-ui-app-reg`
-4. [x] **Accounts in this organizational directory only (Single tenant)**
+4. _Supported account type_: **Single tenant only - \<your-organization>**
 5. Set Redirect URI:
 
 
-    |dropdown|redirect uri|
+    |Select a platform|Redirect URI|
     |--|--|
     |Web|https://icp-REPLACE_ALL_WITH_YOUR_OWN_NAMING-web-ui.azurewebsites.net/signin-oidc|
 
