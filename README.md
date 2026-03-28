@@ -2,7 +2,7 @@
 
 This project pulls the latest release from `icprelay/icp-core` repository.
 
-Current version: `v0.2.2`
+Current `icp-core` version: `v0.2.2`
 
 ## Requirements
 
