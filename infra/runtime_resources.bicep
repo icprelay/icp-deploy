@@ -125,8 +125,16 @@ module servicebus 'modules/servicebus.bicep' = {
   }
 }
 
-module logicapp_rbac_roles 'modules/logicapproles.bicep' = {
-  name: 'logicRBACRoles'
+module logicapp_rbac_roles_persistent 'modules/logicapproles_runtime.bicep' = {
+  name: 'logicPersistentRBACRoles'
+  scope: resourceGroup('persistent')
+  params: {
+    uamiPrincipalId: logic_app.outputs.logicAppPrincipalId
+  }
+}
+
+module logicapp_rbac_roles_runtime 'modules/logicapproles_runtime.bicep' = {
+  name: 'logicRuntimeRBACRoles'
   scope: resourceGroup()
   params: {
     uamiPrincipalId: logic_app.outputs.logicAppPrincipalId
