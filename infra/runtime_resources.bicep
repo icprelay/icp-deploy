@@ -127,7 +127,7 @@ module servicebus 'modules/servicebus.bicep' = {
 
 module logicapp_rbac_roles_persistent 'modules/logicapproles_runtime.bicep' = {
   name: 'logicPersistentRBACRoles'
-  scope: resourceGroup('persistent')
+  scope: resourceGroup('icp-persistent')
   params: {
     uamiPrincipalId: logic_app.outputs.logicAppPrincipalId
   }
