@@ -12,15 +12,4 @@ resource servicebusdatasenderrole 'Microsoft.Authorization/roleAssignments@2022-
   }
 }
 
-resource secrets_user 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(uamiPrincipalId, 'secrets-user')
-  properties: {
-    roleDefinitionId: subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions',
-      'b86a8fe4-44ce-4948-aee5-eccb2c155cd7' // Key Vault Secrets Officer
-    )
-    principalId: uamiPrincipalId
-    principalType: 'ServicePrincipal'
-  }
-}
 
